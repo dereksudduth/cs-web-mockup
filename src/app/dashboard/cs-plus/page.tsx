@@ -16,7 +16,7 @@ import { ESGDashboard } from '@/components/cs-plus/esg/esg-dashboard';
 
 export default function CSPlusPage() {
   return (
-    <div className="container mx-auto p-8 max-w-7xl space-y-8">
+    <div className="space-y-8">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-semibold">CS+</h1>

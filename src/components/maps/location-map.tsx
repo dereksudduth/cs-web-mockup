@@ -29,7 +29,7 @@ export function LocationMap({
 }: LocationMapProps) {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: GOOGLE_MAPS_CONFIG.apiKey,
-    libraries: GOOGLE_MAPS_CONFIG.libraries,
+    libraries: GOOGLE_MAPS_CONFIG.libraries as ["places", "geometry"],
   });
 
   const [map, setMap] = useState<google.maps.Map | null>(null);
@@ -42,7 +42,7 @@ export function LocationMap({
       locations.forEach((location) => {
         bounds.extend(location.position);
       });
-      map.fitBounds(bounds, { padding: 50 });
+      map.fitBounds(bounds, 50);
     }
   }, [locations]);
 
@@ -69,7 +69,7 @@ export function LocationMap({
       zoom={MAP_DEFAULTS.zoom}
       options={{
         ...MAP_DEFAULTS.options,
-        styles: MAP_DEFAULTS.styles,
+        styles: [...MAP_DEFAULTS.styles] as google.maps.MapTypeStyle[],
       }}
       onLoad={onLoad}
     >

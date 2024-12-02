@@ -18,10 +18,10 @@ export function AdminTab() {
         </CardHeader>
         <CardContent>
           <Tabs value={selectedTab} onValueChange={setSelectedTab} className="space-y-6">
-            <TabsList>
-              <TabsTrigger value="location-managers">Location Managers</TabsTrigger>
-              <TabsTrigger value="permissions">User Permissions</TabsTrigger>
-              <TabsTrigger value="system">System Settings</TabsTrigger>
+            <TabsList className="bg-neutral-100 p-1 rounded-full">
+              <TabsTrigger value="location-managers" className="rounded-full">Location Managers</TabsTrigger>
+              <TabsTrigger value="permissions" className="rounded-full">User Permissions</TabsTrigger>
+              <TabsTrigger value="system" className="rounded-full">System Settings</TabsTrigger>
             </TabsList>
 
             <TabsContent value="location-managers">

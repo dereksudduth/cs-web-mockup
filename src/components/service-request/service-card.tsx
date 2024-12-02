@@ -1,72 +1,99 @@
-import { motion } from 'framer-motion';
-import { Lightning, ArrowClockwise, Recycle } from '@phosphor-icons/react';
+import { IconProps } from "@phosphor-icons/react";
+import { motion } from "framer-motion";
 
-interface ServiceCardProps {
-  service: {
-    id: string;
-    name: string;
-    description: string;
-    allowsEmergency?: boolean;
-    allowsRecurring?: boolean;
-    recyclingOptions?: string[];
-  };
-  selected: boolean;
-  onSelect: () => void;
+interface Service {
+  id: string;
+  name: string;
+  description: string;
+  icon: React.ComponentType<IconProps>;
+  price: number;
+  image?: string; // Optional image URL
 }
 
-export function ServiceCard({ service, selected, onSelect }: ServiceCardProps) {
-  const getServiceImage = (id: string) => {
-    const images = {
-      waste: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&q=80',
-      hazardous: 'https://images.unsplash.com/photo-1605600659908-0ef719419d41?auto=format&fit=crop&q=80',
-      bulk: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&q=80',
-      recycling: 'https://images.unsplash.com/photo-1532187643603-ba119ca4109e?auto=format&fit=crop&q=80',
-      quote: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80'
-    };
-    return images[id as keyof typeof images] || images.waste;
-  };
+interface ServiceCardProps {
+  service: Service;
+  selected: boolean;
+  onSelect: () => void;
+  disabled?: boolean;
+  isBundle?: boolean;
+}
+
+export function ServiceCard({
+  service,
+  selected,
+  onSelect,
+  disabled,
+  isBundle,
+}: ServiceCardProps) {
+  const Icon = service.icon;
 
   return (
     <motion.div
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      onClick={onSelect}
-      className={`relative overflow-hidden rounded-xl cursor-pointer transition-all ${
-        selected ? 'ring-2 ring-black ring-offset-4' : ''
-      }`}
+      whileHover={{ scale: disabled ? 1 : 1.02 }}
+      className={`relative overflow-hidden rounded-xl border transition-all ${
+        selected
+          ? "border-primary bg-primary/5 shadow-lg"
+          : "border-neutral-200 hover:border-primary/50"
+      } ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+      onClick={() => !disabled && onSelect()}
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/80 z-10" />
-      
-      <img
-        src={getServiceImage(service.id)}
-        alt={service.name}
-        className="absolute inset-0 w-full h-full object-cover"
-      />
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent" />
+      </div>
 
-      <div className="relative z-20 p-6 min-h-[280px] flex flex-col justify-end text-white">
-        <h3 className="text-2xl font-semibold mb-2">{service.name}</h3>
-        <p className="text-white/90 mb-4">{service.description}</p>
-        
-        <div className="flex flex-wrap gap-2">
-          {service.allowsEmergency && (
-            <span className="inline-flex items-center gap-1 text-sm bg-red-500/90 px-3 py-1 rounded-full">
-              <Lightning className="h-4 w-4" weight="fill" />
-              Emergency Available
-            </span>
-          )}
-          {service.allowsRecurring && (
-            <span className="inline-flex items-center gap-1 text-sm bg-blue-500/90 px-3 py-1 rounded-full">
-              <ArrowClockwise className="h-4 w-4" weight="fill" />
-              Recurring
-            </span>
-          )}
-          {service.recyclingOptions && (
-            <span className="inline-flex items-center gap-1 text-sm bg-green-500/90 px-3 py-1 rounded-full">
-              <Recycle className="h-4 w-4" weight="fill" />
-              Recycling Available
-            </span>
-          )}
+      {/* Content */}
+      <div className="relative p-6">
+        <div className="flex items-start gap-4">
+          <div
+            className={`rounded-xl ${
+              isBundle ? "bg-primary/20 p-3" : "bg-primary/10 p-2"
+            }`}
+          >
+            <Icon
+              className={`${isBundle ? "w-8 h-8" : "w-6 h-6"} text-primary`}
+            />
+          </div>
+          <div className="flex-1">
+            <h3 className="font-semibold text-lg text-neutral-900">
+              {service.name}
+            </h3>
+            <p className="text-sm text-neutral-600 mt-1">
+              {service.description}
+            </p>
+            <div className="mt-3">
+              <span className="text-lg font-bold text-primary">
+                ${service.price}
+              </span>
+              {!isBundle && (
+                <span className="text-sm text-neutral-500 ml-1">
+                  per service
+                </span>
+              )}
+            </div>
+          </div>
         </div>
+
+        {/* Selected Indicator */}
+        {selected && (
+          <div className="absolute top-4 right-4">
+            <div className="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center">
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </div>
+          </div>
+        )}
       </div>
     </motion.div>
   );

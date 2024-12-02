@@ -1,86 +1,87 @@
+import {
+  Lightning,
+  ArrowClockwise,
+  Recycle,
+  Trash,
+  Broom,
+  Tree,
+} from "@phosphor-icons/react";
+
 export const SERVICE_TYPES = [
   {
-    id: 'waste',
-    name: 'Waste Collection',
-    description: 'Regular waste pickup and disposal',
-    requiresScheduling: true,
-    allowsEmergency: true,
-    allowsRecurring: true,
-    recyclingOptions: ['paper', 'plastic', 'glass'],
-    fields: ['volume', 'containerType']
+    id: "emergency-cleanup",
+    name: "Emergency Cleanup",
+    description: "24/7 immediate response for urgent situations",
+    icon: Lightning,
+    price: 299,
   },
   {
-    id: 'hazardous',
-    name: 'Hazardous Waste',
-    description: 'Safe disposal of hazardous materials',
-    requiresScheduling: true,
-    allowsEmergency: true,
-    allowsRecurring: false,
-    requiresPhotos: true,
-    fields: ['materialType', 'quantity', 'safetyNotes']
+    id: "recurring-maintenance",
+    name: "Recurring Maintenance",
+    description: "Scheduled regular maintenance services",
+    icon: ArrowClockwise,
+    price: 199,
   },
   {
-    id: 'bulk',
-    name: 'Bulk Pickup',
-    description: 'Large item removal and disposal',
-    requiresScheduling: true,
-    allowsEmergency: false,
-    allowsRecurring: false,
-    requiresPhotos: true,
-    fields: ['itemType', 'dimensions', 'quantity']
+    id: "waste-management",
+    name: "Waste Management",
+    description: "Professional waste collection and disposal",
+    icon: Trash,
+    price: 249,
   },
   {
-    id: 'recycling',
-    name: 'Recycling',
-    description: 'Sorting and recycling of materials',
-    requiresScheduling: true,
-    allowsEmergency: false,
-    allowsRecurring: true,
-    recyclingOptions: ['electronics', 'metal', 'paper', 'plastic', 'glass'],
-    fields: ['materialTypes', 'volume']
+    id: "recycling-services",
+    name: "Recycling Services",
+    description: "Sustainable recycling and material recovery",
+    icon: Recycle,
+    price: 179,
   },
   {
-    id: 'quote',
-    name: 'Custom Quote',
-    description: 'Get a quote for special projects',
-    requiresScheduling: false,
-    allowsEmergency: false,
-    allowsRecurring: false,
-    requiresPhotos: true,
-    fields: ['projectType', 'timeline', 'budget', 'description']
-  }
+    id: "property-cleanup",
+    name: "Property Cleanup",
+    description: "Complete property cleaning and maintenance",
+    icon: Broom,
+    price: 399,
+  },
+  {
+    id: "green-services",
+    name: "Green Services",
+    description: "Eco-friendly waste management solutions",
+    icon: Tree,
+    price: 299,
+  },
 ];
 
 export const RECYCLING_OPTIONS = {
   paper: {
-    name: 'Paper Recycling',
-    description: 'Recycling of paper, cardboard, and related materials',
-    environmentalImpact: 'Saves 17 trees per ton recycled'
+    name: "Paper Recycling",
+    description: "Recycling of paper, cardboard, and related materials",
+    environmentalImpact: "Saves 17 trees per ton recycled",
   },
   plastic: {
-    name: 'Plastic Recycling',
-    description: 'Recycling of various plastic types',
-    environmentalImpact: 'Reduces oil consumption and CO2 emissions'
+    name: "Plastic Recycling",
+    description: "Recycling of various plastic types",
+    environmentalImpact: "Reduces oil consumption and CO2 emissions",
   },
   glass: {
-    name: 'Glass Recycling',
-    description: 'Recycling of glass containers and materials',
-    environmentalImpact: 'Reduces mining waste and energy consumption'
+    name: "Glass Recycling",
+    description: "Recycling of glass containers and materials",
+    environmentalImpact: "Reduces mining waste and energy consumption",
   },
   electronics: {
-    name: 'E-Waste Recycling',
-    description: 'Safe recycling of electronic devices',
-    environmentalImpact: 'Prevents toxic materials from entering landfills'
+    name: "E-Waste Recycling",
+    description: "Safe recycling of electronic devices",
+    environmentalImpact: "Prevents toxic materials from entering landfills",
   },
   metal: {
-    name: 'Metal Recycling',
-    description: 'Recycling of various metal types',
-    environmentalImpact: 'Reduces mining and energy consumption'
-  }
+    name: "Metal Recycling",
+    description: "Recycling of various metal types",
+    environmentalImpact: "Reduces mining and energy consumption",
+  },
 };
 
 export const EMERGENCY_RESPONSE_TIMES = {
-  hazardous: '1-2 hours',
-  waste: '2-4 hours',
-  default: '4-6 hours'
+  hazardous: "1-2 hours",
+  waste: "2-4 hours",
+  default: "4-6 hours",
 };

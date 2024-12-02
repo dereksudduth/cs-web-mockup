@@ -114,10 +114,10 @@ export default function IntegrationsPage() {
       </div>
 
       <Tabs value={tab} onValueChange={handleTabChange} className="space-y-6">
-        <TabsList>
-          <TabsTrigger value="integrations">Service Integrations</TabsTrigger>
-          <TabsTrigger value="api">API Keys</TabsTrigger>
-          <TabsTrigger value="custom">Custom Integration</TabsTrigger>
+        <TabsList className="bg-neutral-100 p-1 rounded-full">
+          <TabsTrigger value="integrations" className="rounded-full">Service Integrations</TabsTrigger>
+          <TabsTrigger value="api" className="rounded-full">API Keys</TabsTrigger>
+          <TabsTrigger value="custom" className="rounded-full">Custom Integration</TabsTrigger>
         </TabsList>
 
         <TabsContent value="integrations">

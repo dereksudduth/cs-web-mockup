@@ -1,91 +1,42 @@
-'use client';
-
-import { useState } from 'react';
-import { Card } from '@/components/ui/card';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Package, Plus } from '@phosphor-icons/react';
-import { SERVICE_TYPES } from '@/lib/data/service-types';
+import { ServiceBundle as ServiceBundleType } from "@/lib/data/service-bundles";
+import { SERVICE_BUNDLES } from "@/lib/data/service-bundles";
+import { ServiceCard } from "./service-card";
+import { Package } from "@phosphor-icons/react";
 
 interface ServiceBundleProps {
-  selectedServices: string[];
-  onServicesChange: (services: string[]) => void;
+  selectedBundle: string | null;
+  onBundleSelect: (bundleId: string | null) => void;
 }
 
-const BUNDLES = [
-  {
-    id: 'basic',
-    name: 'Basic Bundle',
-    services: ['waste', 'recycling'],
-    discount: 10,
-  },
-  {
-    id: 'complete',
-    name: 'Complete Bundle',
-    services: ['waste', 'recycling', 'bulk'],
-    discount: 15,
-  },
-  {
-    id: 'enterprise',
-    name: 'Enterprise Bundle',
-    services: ['waste', 'recycling', 'hazardous', 'bulk'],
-    discount: 20,
-  },
-];
-
 export function ServiceBundle({
-  selectedServices,
-  onServicesChange,
+  selectedBundle,
+  onBundleSelect,
 }: ServiceBundleProps) {
-  const [selectedBundle, setSelectedBundle] = useState<string | null>(null);
-
-  const handleBundleSelect = (bundleId: string) => {
-    const bundle = BUNDLES.find((b) => b.id === bundleId);
-    if (bundle) {
-      setSelectedBundle(bundleId);
-      onServicesChange(bundle.services);
-    }
-  };
-
   return (
     <div className="space-y-6">
-      <div className="grid gap-4 sm:grid-cols-3">
-        {BUNDLES.map((bundle) => (
-          <Card
-            key={bundle.id}
-            className={`relative p-6 cursor-pointer transition-all ${
-              selectedBundle === bundle.id
-                ? 'ring-2 ring-black ring-offset-2'
-                : 'hover:border-neutral-300'
-            }`}
-            onClick={() => handleBundleSelect(bundle.id)}
-          >
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h3 className="font-medium">{bundle.name}</h3>
-                <span className="text-sm text-green-600">
-                  {bundle.discount}% off
-                </span>
-              </div>
-              
-              <div className="space-y-2">
-                {bundle.services.map((serviceId) => {
-                  const service = SERVICE_TYPES.find((s) => s.id === serviceId);
-                  return (
-                    <div key={serviceId} className="flex items-center gap-2 text-sm">
-                      <Package className="h-4 w-4 text-neutral-500" />
-                      {service?.name}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </Card>
-        ))}
+      <div className="flex items-center gap-2">
+        <Package className="w-5 h-5 text-primary" />
+        <h3 className="text-lg font-semibold text-neutral-900">
+          Popular Service Bundles
+        </h3>
       </div>
-
-      <div className="flex items-center gap-2 text-sm text-neutral-600">
-        <Plus className="h-4 w-4" />
-        <span>Or select individual services below</span>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {SERVICE_BUNDLES.map((bundle) => (
+          <ServiceCard
+            key={bundle.id}
+            service={{
+              id: bundle.id,
+              name: bundle.name,
+              description: bundle.description,
+              icon: Package,
+              price: bundle.price,
+            }}
+            selected={selectedBundle === bundle.id}
+            onSelect={() => onBundleSelect(bundle.id)}
+            disabled={false}
+            isBundle={true}
+          />
+        ))}
       </div>
     </div>
   );

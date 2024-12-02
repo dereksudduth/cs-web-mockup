@@ -1,0 +1,45 @@
+CheckSammy Application Specification
+
+The CheckSammy application is a comprehensive platform serving multiple user roles, including homeowners, enterprises, property managers, facilities, and vendors, with a focus on sustainability, waste management, and advanced technological integration.
+
+Core Features:
+	1.	Customer Features:
+	•	Job Management: Support emergency, scheduled, and recurring jobs, with real-time job tracking via Google Maps.
+	•	Sustainability Metrics (CS Plus): Carbon footprint tracking, waste diversion analytics, certifications, and blockchain-based material lifecycle tracking.
+	•	Subscription Services: Paid access to premium sustainability insights and reporting dashboards.
+	•	Internationalization: Multi-currency support and GDPR compliance.
+	2.	Vendor Features:
+	•	Registration: Mobile app onboarding for individual vendors and businesses.
+	•	Equipment Management: Add vehicles and trailers, validate driver’s licenses (via Veriff), upload insurance, and perform VIN lookups.
+	•	Job Management: Accept, manage, and track job assignments in real-time.
+	•	Payment Processing: Integrate with Stripe and Green Dot Rapid for payouts, supporting centralized payroll for fleets.
+	3.	Facility Features:
+	•	Directory Management: Maintain a database of waste facilities and recycling centers.
+	•	Job Requests: Allow facilities to directly request waste removal or maintenance services.
+	•	Integration: Connect with vendors for task execution.
+	4.	Customer Service Representatives (CSRs):
+	•	Job Support: Input and manage jobs on behalf of customers.
+	•	Communication: Provide VoIP and call center software for customer interactions.
+	•	Feedback: Collect and analyze feedback for continuous improvement.
+
+Technology Stack:
+	•	Frontend:
+	•	Next.js with Zustand, React Hook Form, ShadCN, and Framer Motion for animations.
+	•	Google Maps for location-based tracking.
+	•	Backend:
+	•	AWS serverless architecture: Lambda, DynamoDB, S3, SQS/EventBridge for event-driven workflows.
+	•	Financial system integrations using Python and Pydantic for schemas.
+	•	Notifications:
+	•	Twilio for SMS and Firebase for mobile notifications.
+	•	Analytics:
+	•	Real-time dashboards and reporting, with optional blockchain-backed material tracking.
+
+User Experience:
+	•	Landing Page: Modern Web 3.0 design to attract users.
+	•	Dashboards: Interactive and role-specific dashboards.
+	•	Accessibility: Full WCAG compliance.
+
+Future Enhancements:
+	•	AI-driven vendor-job matching.
+	•	Expanded fleet management tools.
+	•	Advanced waste diversion metrics and sustainability features.
